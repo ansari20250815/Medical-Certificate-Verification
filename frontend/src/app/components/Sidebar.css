@@ -1,0 +1,127 @@
+/* Sidebar Container */
+.sidebar {
+  width: 240px;
+  height: 100vh;
+  background-color: #15202b;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Logo / Header */
+.sidebar-header {
+  padding: 8px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid #374151;
+  margin-bottom: 20px;
+}
+
+.cl-logo {
+  width: 175px;
+  object-fit: contain;
+  align-items: center;
+}
+
+/* Menu Lists */
+.sidebar-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.top-menu {
+  flex-grow: 1;
+}
+
+/* Menu Item */
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 16px;
+  padding: 12px 14px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.25s, color 0.25s;
+  color: #000000;
+}
+
+.menu-item .icon {
+  font-size: 18px;
+  color: inherit;
+  flex-shrink: 0;
+}
+
+.menu-item .label {
+  flex-grow: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: inherit;
+}
+
+/* Hover and Active States */
+.menu-item:hover:not(.disabled),
+.menu-item.active {
+  background-color: #32475b;
+  color: #ffffff;
+}
+
+.menu-item.active {
+  background-color: #657786;
+}
+
+.menu-item.active .icon,
+.menu-item.active .label,
+.menu-item:hover:not(.disabled) .icon,
+.menu-item:hover:not(.disabled) .label {
+  color: #ffffff;
+}
+
+/* Disabled Items */
+.menu-item.disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* Submenu Styles */
+.submenu {
+  list-style: none;
+  margin-top: 5px;
+  margin-left: 30px;
+  padding-left: 0;
+}
+
+
+.submenu-item {
+  padding: 8px 10px;
+  font-size: 14px;
+  color: #222222; /* dark color */
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.submenu-item:hover {
+  color: #000000; /* even darker or black on hover */
+}
+
+.submenu-link {
+  color: #222222;             /* Dark text color */
+  text-decoration: none;      /* Remove underline */
+  display: flex;              /* Use flex for vertical alignment */
+   /* Align text to the left */
+}
+
+.submenu-link:hover {
+  color: #000000;             /* Darker text on hover */
+}
+
+
+

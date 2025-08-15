@@ -1,0 +1,444 @@
+body {
+  overflow-x: hidden;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  background: #f8f9fa;
+  min-height: 100vh;
+  width: 100vw;
+  min-width: 100vw;
+  overflow-x: hidden;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.header img {
+  margin-bottom: 1rem;
+}
+
+.subtitle {
+  color: #0070f3;
+  font-size: 1.2rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.hero {
+  background: linear-gradient(135deg, #e0e7ff 0%, #f8fafc 100%);
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+  padding: 2rem;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.heroImageSection {
+  position: relative;
+  width: 100vw;
+  height: 60vh;
+  min-height: 300px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.heroImageWrapper {
+  position: relative;
+  width: 50vw;
+  max-width: 1500px;
+  height: 200%;
+  min-height: 00px;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+  z-index: 1;
+}
+
+.heroImage {
+  object-fit: cover;
+}
+
+.heroOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  pointer-events: none;
+  background: rgba(0,0,0,0.35);
+}
+
+.heroQuote {
+  color: #fff;
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-align: center;
+  padding: 2rem;
+  text-shadow: 0 2px 16px rgba(0,0,0,0.3);
+}
+
+.heroSubQuote {
+  color: #fff;
+  font-size: 1.3rem;
+  font-weight: 400;
+  text-align: center;
+  margin-top: 1rem;
+  padding: 0 2rem;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.25);
+}
+
+@media (max-width: 600px) {
+  .heroQuote {
+    font-size: 1.3rem;
+    padding: 1rem;
+  }
+  .heroSubQuote {
+    font-size: 1rem;
+    padding: 0 1rem;
+  }
+  .heroImageSection {
+    min-height: 250px;
+    height: 60vh;
+  }
+}
+
+.features {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  padding: 2rem;
+  margin: 2rem auto;
+  max-width: 600px;
+  text-align: center;
+}
+
+.features ul {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0 0;
+}
+
+.features li {
+  margin: 0.7rem 0;
+  font-size: 1.08rem;
+  color: #333;
+}
+
+.stats {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.stats div {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  padding: 1rem;
+  text-align: center;
+}
+
+.card {
+  background: linear-gradient(135deg, #e0e7ff 0%, #f8fafc 100%);
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+  padding: 1.5rem 2rem;
+  text-align: center;
+  min-width: 160px;
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-6px) scale(1.04);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+}
+
+.revenue {
+  margin: 2rem 0;
+  background: #fff;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.products {
+  margin: 2rem 0;
+  background: #fff;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.actions {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.loginBtn, .applyBtn {
+  padding: 0.9rem 2.2rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  transition: background 0.2s, color 0.2s;
+}
+
+.loginBtn {
+  background: #0070f3;
+  color: #fff;
+}
+
+.loginBtn:hover {
+  background: #005bb5;
+}
+
+.applyBtn {
+  background: #fff;
+  color: #0070f3;
+  border: 2px solid #0070f3;
+}
+
+.applyBtn:hover {
+  background: #e0e7ff;
+  color: #005bb5;
+}
+
+.info {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  padding: 2rem;
+  margin: 2rem auto;
+  max-width: 600px;
+  text-align: center;
+}
+
+.info ul {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0 0;
+}
+
+.info li {
+  margin: 0.7rem 0;
+  font-size: 1.08rem;
+  color: #333;
+}
+
+.footer {
+  margin-top: 2rem;
+  color: #888;
+  text-align: center;
+}
+
+.navbar {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.navLeft {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+.navRight {
+  display: flex;
+  align-items: center;
+  margin-left: 2rem;
+}
+.brand {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #0070f3;
+  margin-right: 1.5rem;
+}
+.navLink {
+  background: none;
+  border: none;
+  color: #333;
+  font-size: 1.05rem;
+  font-weight: 500;
+  margin-right: 1rem;
+  cursor: pointer;
+  transition: color 0.2s;
+  text-decoration: none;
+  padding: 0.3rem 0.7rem;
+}
+.navLink:hover {
+  color: #0070f3;
+  background: #e0e7ff;
+  border-radius: 6px;
+}
+.navLinkNav {
+  color: #222;
+  font-size: 1.1rem;
+  font-weight: 500;
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.2rem 0.7rem;
+  border-radius: 6px;
+}
+
+.adrollHome {
+  background: rgb(233, 241, 249);
+  min-height: 100vh;
+}
+.adrollNavbar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 3rem;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+.adrollLogoSection {
+  display: flex;
+  align-items: center;
+}
+.adrollLogo {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: rgb(35, 110, 195);
+  letter-spacing: 2px;
+}
+.adrollNavLinks {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+.adrollNavLinks a {
+  color: #888;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: color 0.2s;
+}
+.adrollNavLinks a:hover {
+  color: rgb(35, 110, 195);
+}
+.adrollTryBtn {
+  background: rgb(35, 110, 195);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 0.7rem 1.5rem;
+  font-weight: 700;
+  margin-right: 1rem;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.2s;
+}
+.adrollTryBtn:hover {
+  background: #1c5fa3;
+}
+.adrollLogin {
+  color: #888;
+  font-weight: 600;
+  font-size: 1rem;
+  margin-left: 1rem;
+}
+.adrollHeroSection {
+  background: rgb(35, 110, 195);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 3rem 5vw;
+  min-height: 60vh;
+}
+.adrollHeroContent {
+  color: #fff;
+  max-width: 500px;
+}
+.adrollHeroContent h1 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+}
+.adrollHeroContent p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+.adrollSignUpBtn {
+  background: #fff;
+  color: rgb(35, 110, 195);
+  border: none;
+  border-radius: 4px;
+  padding: 0.8rem 2rem;
+  font-weight: 700;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.adrollSignUpBtn:hover {
+  background: rgb(233, 241, 249);
+  color: rgb(35, 110, 195);
+}
+.adrollHeroImageWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loginBtnNav {
+  color: #222;
+  font-weight: 500;
+  font-size: 1.1rem;
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.loginBtnNav:hover {
+  color: #236ec3;
+  text-decoration: underline;
+}
+.getStartedBtnNav {
+  border: 2px solid #111;
+  border-radius: 8px;
+  padding: 0.7rem 1.6rem;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #111;
+  background: #fff;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s, border 0.2s;
+  cursor: pointer;
+}
+.getStartedBtnNav:hover {
+  background: #236ec3;
+  color: #fff;
+  border-color: #236ec3;
+}
