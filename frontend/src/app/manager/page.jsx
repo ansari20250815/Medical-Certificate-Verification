@@ -1,7 +1,5 @@
-'use client'
-
-import Manager from "./Manager"
+import Manager from "./Manager";
 
 export default function ManagerPage() {
-  return <Manager />
+  return <Manager />;
 }

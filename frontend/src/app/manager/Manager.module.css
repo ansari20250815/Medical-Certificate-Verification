@@ -1,0 +1,38 @@
+.manager-dashboard-table {
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  overflow: hidden;
+}
+.manager-dashboard-table th {
+  background: #1976d2;
+  color: #fff;
+  font-weight: 600;
+  font-size: 1rem;
+}
+.manager-dashboard-table td {
+  font-size: 0.95rem;
+  padding: 10px 8px;
+  border-bottom: 1px solid #eee;
+}
+.manager-dashboard-table tr:hover {
+  background: #f5faff;
+}
+.manager-dashboard-table .tampered {
+  color: #d32f2f;
+  font-weight: bold;
+}
+.manager-dashboard-table .ok {
+  color: #388e3c;
+}
+.manager-dashboard-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1976d2;
+  margin-bottom: 24px;
+}
+.manager-dashboard-container {
+  padding: 32px;
+  background: #f8fafc;
+  min-height: 100vh;
+}

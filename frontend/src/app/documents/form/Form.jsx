@@ -22,7 +22,7 @@ import dayjs from 'dayjs';
 export default function Form() {
   const methods = useForm({
     defaultValues: {
-      employeeId: '',
+      employeeId: '165468',
       leaveType: 'Sick Leave',
       leaveStartDate: null,
       leaveEndDate: null,
@@ -45,28 +45,28 @@ export default function Form() {
   const onSubmit = async (form) => {
     const formData = new FormData();
     formData.append('employeeId', form.employeeId);
-    formData.append('leaveStartDate', form.leaveStartDate ? form.leaveStartDate.format('YYYY-MM-DD') : '');
-    formData.append('leaveEndDate', form.leaveEndDate ? form.leaveEndDate.format('YYYY-MM-DD') : '');
-    formData.append('reason', form.reason);
-    formData.append('file', form.medicalCertificate);
     formData.append(
       'leaveDates',
       form.leaveStartDate && form.leaveEndDate
         ? `${form.leaveStartDate.format('YYYY-MM-DD')} to ${form.leaveEndDate.format('YYYY-MM-DD')}`
         : ''
     );
+    formData.append('reason', form.reason);
+    formData.append('file', form.medicalCertificate); // <-- make sure this is a File object
 
     try {
+      const token = localStorage.getItem('token'); // or wherever you store it
       const res = await fetch('http://localhost:8080/api/leave/apply', {
         method: 'POST',
+        body: formData,
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('token') || ''}`
-        },
-        body: formData
+          'Authorization': 'Bearer ' + token // if needed
+        }
       });
       let data = {};
       try {
         data = await res.json();
+        console.log('Backend response:', data);
       } catch {
         data = {};
       }
@@ -78,7 +78,7 @@ export default function Form() {
         setResult(data);
         setSnackMessage('✅ Leave application submitted!');
         setSnackType('success');
-        reset();
+        // Do NOT reset the form so data remains visible
       }
       setSnackOpen(true);
     } catch (error) {
@@ -151,7 +151,7 @@ export default function Form() {
                     error={!!errors.leaveType}
                   >
                     <MenuItem value="Sick Leave">Sick Leave</MenuItem>
-                    {/* Add more leave types here if needed */}
+                    <MenuItem value="Hospitalisation Leave">Hospitalisation Leave</MenuItem>
                   </Select>
                 </FormControl>
               )}

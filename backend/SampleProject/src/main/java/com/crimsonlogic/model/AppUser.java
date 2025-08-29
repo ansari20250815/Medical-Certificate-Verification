@@ -1,7 +1,6 @@
 package com.crimsonlogic.model;
 
-import jakarta.persistence.*;
-
+import javax.persistence.*;
 @Entity
 @Table(name = "APP_USER")
 public class AppUser {

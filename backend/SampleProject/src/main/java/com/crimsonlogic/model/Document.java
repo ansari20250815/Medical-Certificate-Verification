@@ -1,6 +1,6 @@
 package com.crimsonlogic.model;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 

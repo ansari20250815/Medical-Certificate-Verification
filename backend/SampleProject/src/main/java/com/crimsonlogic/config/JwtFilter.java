@@ -2,17 +2,20 @@ package com.crimsonlogic.config;
 
 import com.crimsonlogic.repository.AppUserRepository;
 import com.crimsonlogic.service.JwtService;
-import jakarta.servlet.*;
-import jakarta.servlet.http.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.Optional;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @Component
 public class JwtFilter extends OncePerRequestFilter {
@@ -32,8 +35,10 @@ public class JwtFilter extends OncePerRequestFilter {
 
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
-            throws ServletException, IOException {
+    protected void doFilterInternal(javax.servlet.http.HttpServletRequest request, 
+                                    javax.servlet.http.HttpServletResponse response, 
+                                    javax.servlet.FilterChain filterChain)
+            throws javax.servlet.ServletException, java.io.IOException {
 
         String authHeader = request.getHeader("Authorization");
 
@@ -42,22 +47,22 @@ public class JwtFilter extends OncePerRequestFilter {
             String username = jwtService.extractUsername(token);
 
             if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-                var user = userRepository.findByUsername(username);
+                Optional<com.crimsonlogic.model.AppUser> user = userRepository.findByUsername(username);
                 if (user.isPresent() && jwtService.validateToken(token, username)) {
-                    var userDetails = User.builder()
-                            .username(user.get().getUsername())
-                            .password(user.get().getPassword())
-                            .roles(user.get().getRole())
-                            .build();
+                    UserDetails userDetails = User.builder()
+                        .username(user.get().getUsername())
+                        .password(user.get().getPassword())
+                        .roles(user.get().getRole())
+                        .build();
 
-                    var auth = new UsernamePasswordAuthenticationToken(
-                            userDetails, null, userDetails.getAuthorities());
+                    UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
+                        userDetails, null, userDetails.getAuthorities());
                     auth.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                     SecurityContextHolder.getContext().setAuthentication(auth);
                 }
             }
         }
 
-        chain.doFilter(request, response);
+        filterChain.doFilter(request, response);
     }
 }

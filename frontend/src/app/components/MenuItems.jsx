@@ -9,11 +9,11 @@ export const menuItems = [
     icon: <DashboardIcon />,
   },
   {
-    label: 'Documents',
+    label: 'Manage Leaves',
     icon: <DescriptionIcon />,
     children: [
       {
-        label: 'Submit Form',
+        label: 'Apply Leave',
         href: '/documents/form',
       },
       {

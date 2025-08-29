@@ -1,4 +1,8 @@
+
 package com.crimsonlogic.controller;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import com.crimsonlogic.dto.LeaveApplicationDTO;
 import com.crimsonlogic.model.LeaveApplication;
@@ -16,6 +20,25 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/leave")
 public class LeaveController {
+    @PostMapping("/apply-and-list")
+    public ResponseEntity<List<LeaveApplicationDTO>> applyLeaveAndList(
+            @RequestParam("employeeId") String employeeId,
+            @RequestParam("leaveDates") String leaveDates,
+            @RequestParam("reason") String reason,
+            @RequestParam("file") MultipartFile file
+    ) {
+        try {
+            leaveService.applyMedicalLeave(employeeId, leaveDates, reason, file);
+            // Return all applications for this employee
+            List<LeaveApplicationDTO> employeeApps = repository.findAll().stream()
+                .filter(app -> app.getEmployeeId().equals(employeeId))
+                .map(leaveService::toDTO)
+                .collect(Collectors.toList());
+            return ResponseEntity.ok(employeeApps);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
+    }
 
     private final LeaveService leaveService;
     private final LeaveApplicationRepository repository;
@@ -33,14 +56,20 @@ public class LeaveController {
             @RequestParam("file") MultipartFile file
     ) {
         try {
+            System.out.println("employeeId: " + employeeId);
+            System.out.println("leaveDates: " + leaveDates);
+            System.out.println("reason: " + reason);
+            System.out.println("file: " + (file != null ? file.getOriginalFilename() : "null"));
             LeaveApplicationDTO application = leaveService.applyMedicalLeave(employeeId, leaveDates, reason, file);
-            return ResponseEntity.ok(Map.of(
-                    "applicationId", application.getApplicationId(),
-                    "status", application.getStatus()
-            ));
+            Map<String, Object> response = new HashMap<>();
+            response.put("applicationId", application.getApplicationId());
+            response.put("status", application.getStatus());
+            return ResponseEntity.ok(response);
         } catch (Exception e) {
+            Map<String, String> errorResponse = new HashMap<>();
+            errorResponse.put("error", "Failed to apply leave");
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body(Map.of("error", "Failed to apply leave"));
+                    .body(errorResponse);
         }
     }
 
@@ -69,6 +98,11 @@ public class LeaveController {
             dto.setDateOfIssue(application.getDateOfIssue());
             dto.setMcNumber(application.getMcNumber());
             dto.setQrCodePresent(application.getQrCodePresent());
+            dto.setQrCodeUrl(application.getQrCodeUrl());
+            dto.setDownloadUrl("/uploads/" + application.getFileName());
+            dto.setConfidenceScore(application.getConfidenceScore());
+            dto.setSystemSuggestion(application.getSystemSuggestion());
+            dto.setResultDetails(application.getResultDetails());
             return dto;
         }).collect(Collectors.toList());
     }
@@ -83,9 +117,45 @@ public class LeaveController {
             @PathVariable Long id,
             @RequestParam("status") String status // APPROVED or REJECTED
     ) {
-        LeaveApplication app = repository.findById(id).orElseThrow();
+        LeaveApplication app = repository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Leave application not found"));
         app.setStatus(status);
         repository.save(app);
         return leaveService.toDTO(app);
     }
+
+    @GetMapping(value = "/applications", produces = "application/json")
+    public List<LeaveApplicationDTO> getApplications() {
+            return repository.findAll().stream().map(application -> {
+                LeaveApplicationDTO dto = new LeaveApplicationDTO();
+                dto.setApplicationId(application.getId());
+                dto.setEmployeeId(application.getEmployeeId());
+                dto.setLeaveDates(application.getLeaveDates());
+                dto.setReason(application.getReason());
+                dto.setRemarks(application.getRemarks());
+                dto.setFileName(application.getFileName());
+                dto.setStatus(application.getStatus());
+                dto.setPatientName(application.getPatientName());
+                dto.setDoctorName(application.getDoctorName());
+                dto.setClinicName(application.getClinicName());
+                dto.setClinicAddress(application.getClinicAddress());
+                dto.setContactNumber(application.getContactNumber());
+                dto.setRegistrationId(application.getRegistrationId());
+                dto.setDateOfIssue(application.getDateOfIssue());
+                dto.setMcNumber(application.getMcNumber());
+                dto.setQrCodePresent(application.getQrCodePresent());
+                dto.setQrCodeUrl(application.getQrCodeUrl());
+                dto.setDownloadUrl("/uploads/" + application.getFileName());
+                dto.setConfidenceScore(application.getConfidenceScore());
+                dto.setSystemSuggestion(application.getSystemSuggestion());
+                dto.setResultDetails(application.getResultDetails());
+                return dto;
+            }).collect(Collectors.toList());
+    }
+    @GetMapping("/valid-certificates")
+    public ResponseEntity<List<LeaveApplicationDTO>> getValidCertificatesForEmployees() {
+        List<LeaveApplicationDTO> validCertificates = leaveService.getValidCertificatesForEmployees();
+        return ResponseEntity.ok(validCertificates);
+    }
+
 }

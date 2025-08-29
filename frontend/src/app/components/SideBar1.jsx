@@ -12,10 +12,10 @@ const topMenuItems = [
   {
     id: 1,
     icon: <FaTachometerAlt />,
-    label: "Document",
+    label: "Manage Leaves",
     subMenu: [
-      { id: "1-1", label: "Submit Form" },
-      { id: "1-2", label: "View Documents" },
+      { id: "1-1", label: "Apply Leave" },
+      { id: "1-2", label: "View Leave Status" },
     ],
   },
   {
@@ -81,7 +81,7 @@ const Sidebar = () => {
               <ul className="submenu">
                 {subMenu.map(({ id: subId, label: subLabel }) => (
                   <li key={subId} className="submenu-item">
-                    {subLabel === "Submit Form" ? (
+                    {subLabel === "Apply Leave" ? (
                       <Link href="/documents/form" className="submenu-link">
                         {subLabel}
                       </Link>

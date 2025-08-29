@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -89,6 +90,23 @@ public class DocumentController {
     public ResponseEntity<List<Document>> getAllDocuments() {
         List<Document> documents = documentRepository.findAll();
         return ResponseEntity.ok(documents);
+    }
+
+    @GetMapping("/download/{fileName}")
+    public ResponseEntity<?> downloadDocument(@PathVariable String fileName) {
+        try {
+            Path filePath = Paths.get("D:/Learning/Hackthon/MC-uploads").resolve(fileName);
+            if (!Files.exists(filePath)) {
+                return ResponseEntity.notFound().build();
+            }
+            String contentType = Files.probeContentType(filePath);
+            return ResponseEntity.ok()
+                .header("Content-Disposition", "attachment; filename=" + fileName)
+                .header("Content-Type", contentType != null ? contentType : "application/octet-stream")
+                .body(Files.readAllBytes(filePath));
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body("Could not download file: " + e.getMessage());
+        }
     }
 
 }

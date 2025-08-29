@@ -32,7 +32,9 @@ public class AuthController {
             );
 
             String token = jwtService.generateToken(request.getUsername());
-            return ResponseEntity.ok(Map.of("token", token));
+            Map<String, String> response = new HashMap<>();
+            response.put("token", token);
+            return ResponseEntity.ok(response);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Invalid credentials");
         }

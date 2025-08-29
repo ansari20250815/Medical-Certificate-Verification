@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.*;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Collections;
 
 @Service
 public class AppUserDetailsService implements UserDetailsService {
@@ -19,7 +20,7 @@ public class AppUserDetailsService implements UserDetailsService {
                 .map(user -> new User(
                         user.getUsername(),
                         user.getPassword(),
-                        List.of(new SimpleGrantedAuthority("ROLE_" + user.getRole()))
+                        Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + user.getRole()))
                 ))
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }

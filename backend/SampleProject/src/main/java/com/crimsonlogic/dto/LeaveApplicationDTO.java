@@ -1,6 +1,9 @@
 package com.crimsonlogic.dto;
 
 public class LeaveApplicationDTO {
+    private Integer confidenceScore;
+    private String systemSuggestion;
+    private String resultDetails;
     private Long applicationId;
     private String employeeId;
     private String leaveDates;
@@ -18,10 +21,19 @@ public class LeaveApplicationDTO {
     private String dateOfIssue;
     private String mcNumber;
     private Boolean qrCodePresent;
+    private String qrCodeUrl;
+    private String remarks;
+    private String downloadUrl;
 
     public LeaveApplicationDTO() {}
+    public Integer getConfidenceScore() { return confidenceScore; }
+    public void setConfidenceScore(Integer confidenceScore) { this.confidenceScore = confidenceScore; }
+    public String getSystemSuggestion() { return systemSuggestion; }
+    public void setSystemSuggestion(String systemSuggestion) { this.systemSuggestion = systemSuggestion; }
+    public String getResultDetails() { return resultDetails; }
+    public void setResultDetails(String resultDetails) { this.resultDetails = resultDetails; }
 
-    public LeaveApplicationDTO(Long applicationId, String employeeId, String leaveDates, String reason, String fileName, String status, String patientName, String doctorName, String clinicName, String clinicAddress, String contactNumber, String registrationId, String dateOfIssue, String mcNumber, Boolean qrCodePresent) {
+    public LeaveApplicationDTO(Long applicationId, String employeeId, String leaveDates, String reason, String fileName, String status, String patientName, String doctorName, String clinicName, String clinicAddress, String contactNumber, String registrationId, String dateOfIssue, String mcNumber, Boolean qrCodePresent, String qrCodeUrl, String remarks, String downloadUrl, Integer confidenceScore, String systemSuggestion, String resultDetails) {
         this.applicationId = applicationId;
         this.employeeId = employeeId;
         this.leaveDates = leaveDates;
@@ -37,6 +49,12 @@ public class LeaveApplicationDTO {
         this.dateOfIssue = dateOfIssue;
         this.mcNumber = mcNumber;
         this.qrCodePresent = qrCodePresent;
+        this.qrCodeUrl = qrCodeUrl;
+        this.remarks = remarks;
+        this.downloadUrl = downloadUrl;
+        this.confidenceScore = confidenceScore;
+        this.systemSuggestion = systemSuggestion;
+        this.resultDetails = resultDetails;
     }
 
     public Long getApplicationId() { return applicationId; }
@@ -83,4 +101,23 @@ public class LeaveApplicationDTO {
 
     public Boolean getQrCodePresent() { return qrCodePresent; }
     public void setQrCodePresent(Boolean qrCodePresent) { this.qrCodePresent = qrCodePresent; }
+    public String getQrCodeUrl() { return qrCodeUrl; }
+    public void setQrCodeUrl(String qrCodeUrl) { this.qrCodeUrl = qrCodeUrl; }
+
+    public String getRemarks() { return remarks; }
+    public void setRemarks(String remarks) { this.remarks = remarks; }
+ 
+    public String getDownloadUrl() {
+
+        return downloadUrl;
+
+    }
+ 
+    public void setDownloadUrl(String downloadUrl) {
+
+        this.downloadUrl = downloadUrl;
+
+    }
+
+ 
 }

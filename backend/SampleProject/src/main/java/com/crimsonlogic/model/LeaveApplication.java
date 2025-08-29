@@ -1,11 +1,23 @@
 package com.crimsonlogic.model;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "leave_applications")
 public class LeaveApplication {
+    private Integer confidenceScore;
+    private String systemSuggestion;
+    private String resultDetails;
+    private String qrCodeUrl;
+
+    public String getQrCodeUrl() {
+        return qrCodeUrl;
+    }
+
+    public void setQrCodeUrl(String qrCodeUrl) {
+        this.qrCodeUrl = qrCodeUrl;
+    }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,8 +39,18 @@ public class LeaveApplication {
     private String dateOfIssue;
     private String mcNumber;
     private Boolean qrCodePresent;
-
+    // Added remarks field
+    private String remarks;
+ 
+    // Added certificateHash field
+    private String certificateHash;
     // Getters and Setters
+    public Integer getConfidenceScore() { return confidenceScore; }
+    public void setConfidenceScore(Integer confidenceScore) { this.confidenceScore = confidenceScore; }
+    public String getSystemSuggestion() { return systemSuggestion; }
+    public void setSystemSuggestion(String systemSuggestion) { this.systemSuggestion = systemSuggestion; }
+    public String getResultDetails() { return resultDetails; }
+    public void setResultDetails(String resultDetails) { this.resultDetails = resultDetails; }
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
@@ -77,4 +99,11 @@ public class LeaveApplication {
 
     public Boolean getQrCodePresent() { return qrCodePresent; }
     public void setQrCodePresent(Boolean qrCodePresent) { this.qrCodePresent = qrCodePresent; }
+
+    public String getRemarks() { return remarks; }
+    public void setRemarks(String remarks) { this.remarks = remarks; }
+
+    public String getCertificateHash() { return certificateHash; }
+    public void setCertificateHash(String certificateHash) { this.certificateHash = certificateHash; }
+
 }

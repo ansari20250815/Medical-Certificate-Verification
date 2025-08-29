@@ -33,7 +33,7 @@ DELETE FROM APP_USER;
 
 INSERT INTO APP_USER (id, username, password, role) VALUES (
   1,
-  'admin',
+  '165468',
   '$2a$12$E7nT9DqIKi9UpKtWSJY.Oe2Q4a7f3ZYl5TI9WyeFBlGDwofAgs562',  -- ← admin123
   'ADMIN'
 );

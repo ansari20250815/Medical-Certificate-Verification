@@ -28,13 +28,18 @@ public class SecurityConfig {
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.csrf(csrf -> csrf.disable())
-				.authorizeHttpRequests(auth -> auth.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-						.requestMatchers("/api/auth/login", "/h2-console/**", "/api/leave/**").permitAll() // <-- add this
-						.anyRequest().authenticated())
+				.authorizeHttpRequests(auth -> auth
+					.antMatchers("/favicon.ico").permitAll()
+					.antMatchers("/api/leave/**").permitAll()
+					.antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+					.antMatchers("/api/auth/login", "/h2-console/**").permitAll()
+					.antMatchers("/uploads/**").permitAll()
+					.antMatchers("/api/documents/download/**").permitAll()
+					.anyRequest().authenticated())
 				.sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.headers(headers -> headers.frameOptions().disable())
 				.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
-
+ 
 		return http.build();
 	}
 

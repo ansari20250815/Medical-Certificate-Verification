@@ -1,6 +1,8 @@
 'use client'
 
-import Dashboard from "./Dashboard"
+import Dashboard from "./ManagerDashboard"
+
+// import Dashboard from "./Dashboard"
 
 
 export default function DashboardPage() {
